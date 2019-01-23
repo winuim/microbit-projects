@@ -1,0 +1,21 @@
+serial.onDataReceived(serial.delimiters(Delimiters.Dollar), function () {
+    serial.writeLine("{")
+    serial.writeLine("\"temperature\":" + input.temperature() + ",")
+    serial.writeLine("\"lightLevel\":" + input.lightLevel() + ",")
+    serial.writeLine("\"acceleration\":" + input.acceleration(Dimension.Strength) + ",")
+    serial.writeLine("\"pitch\":" + input.rotation(Rotation.Pitch) + ",")
+    serial.writeLine("\"roll\":" + input.rotation(Rotation.Roll) + ",")
+    serial.writeLine("}")
+})
+bluetooth.onBluetoothConnected(function () {
+    basic.showIcon(IconNames.Happy)
+})
+bluetooth.onBluetoothDisconnected(function () {
+    basic.showIcon(IconNames.Asleep)
+})
+bluetooth.startAccelerometerService()
+bluetooth.startButtonService()
+bluetooth.startIOPinService()
+bluetooth.startLEDService()
+bluetooth.startTemperatureService()
+basic.showString("MONITOR SERVICES")
